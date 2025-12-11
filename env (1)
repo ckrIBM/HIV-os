@@ -1,0 +1,8 @@
+API_USERNAME=admin
+API_PASSWORD=adminpass
+DB_HOST=1cb40789-af84-4d52-8f04-ac55457b82d1.d7deeff0d58745aba57fa5c84685d5b4.databases.appdomain.cloud
+DB_PORT=32031
+DB_NAME=ibmclouddb
+DB_USER=ibm_cloud_b97f0d9e_efa4_4906_8b53_b3665f34daf2
+DB_PASS=9Tai1VfOtilL1316SWy4tObtHlvXlM8p
+DB_SSLMODE=require
