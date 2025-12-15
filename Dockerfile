@@ -15,5 +15,6 @@ COPY mainv2.py .
 EXPOSE 8080
 
 # Comando para ejecutar la aplicación
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "mainv2:app", "--host", "0.0.0.0", "--port", "8080"]
+
 
