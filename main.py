@@ -226,7 +226,7 @@ def identificacion_ciclo(
         return {"ciclo": "Renovación", "codigo": 2}
 
     # Caso 3: Renovación con Sustitución (Nuevo caso mock)
-    elif troquel == "23523" and socio_id == "62245693702":
+    elif troquel == "21955" and socio_id == "62245693702":
         return {"ciclo": "Renovación", "codigo": 2}
     
     # Otros casos
@@ -301,3 +301,4 @@ def health():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8080)
+
