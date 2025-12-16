@@ -90,7 +90,7 @@ def check_basic_auth(credentials: HTTPBasicCredentials = Depends(security)):
 # Mock de Recetas por Ticket
 # Estructura: Ticket ID -> { Socio ID, Lista de Recetas }
 MOCK_RECETAS_DB = {
-    # CASO 1: HIV Positivo (Una receta con medicamento HIV)
+    # CASO 1: HIV Positivo (Una receta con medicamento HIV)- 1 medicamento
     "1000073123": {
         "socio": "61134592601",
         "recetas": [
@@ -102,7 +102,7 @@ MOCK_RECETAS_DB = {
             }
         ]
     },
-    # CASO 2: HIV Positivo - RENOVACION
+    # CASO 2: HIV Positivo - RENOVACION - 1 medicamento
     "1000073124": {
         "socio": "62245693702",
         "recetas": [
@@ -114,7 +114,7 @@ MOCK_RECETAS_DB = {
             }
         ]
     },
-    # CASO 3: HIV Negativo (Una receta con medicamento NO HIV)
+    # CASO 3: HIV Negativo (Una receta con medicamento NO HIV)- 1 medicamento
     "1000073125": {
         "socio": "63356704803",
         "recetas": [
@@ -126,8 +126,8 @@ MOCK_RECETAS_DB = {
             }
         ]
     },
-    # CASO 4: Renovación con Sustitución (Ejemplo nuevo)
-    "1000073199": {
+    # CASO 4: Renovación con Sustitución  - 1 medicamento
+    "1000073126": {
         "socio": "62245693702", # Mismo socio que Renovación (Roberto)
         "recetas": [
             {
@@ -137,7 +137,158 @@ MOCK_RECETAS_DB = {
                 "descripcion": "3 TC COMPLEX 600 MG"
             }
         ]
+    },
+    # CASO 5: HIV positivo - Renovacion no sustitucion - 1 medicamento
+    "1000073127": {
+        "socio": "61134592601",
+        "recetas": [
+            {
+                "Troquel": "4108451",
+                "Codigo": "18000",
+                "monodroga": "150 MG COMP.REC.X 60",
+                "descripcion": "GlaxoSmithKline"
+            }
+        ]
+    },
+    # CASO 6: Cambio de tratamiento - 1 medicamento
+    "1000073128": {
+        "socio": "61134592602",
+        "recetas": [
+            {
+                "Troquel": "4108451",
+                "Codigo": "18000",
+                "monodroga": "150 MG COMP.REC.X 60",
+                "descripcion": "GlaxoSmithKline"
+            }
+        ]
+    },
+    # CASO 7: 1 receta de HIV + 1 receta de ibupirac - REVISAR - 2 recetas con 1 medicamento c/u.
+    "1000073129": {
+        "socio": "61134592602",
+        "recetas": [
+            {
+                "Troquel": "4108451",
+                "Codigo": "18000",
+                "monodroga": "150 MG COMP.REC.X 60",
+                "descripcion": "GlaxoSmithKline"
+            },
+            {
+                "Troquel": "2039",
+                "Codigo": "3002",
+                "monodroga": "IBUPROFENO",
+                "descripcion": "IBUPROFENO 400 MG"
+            }
+        ]
+    },
+    # CASO 8: 2 medicamentos de ibupiracs - DESCARTAR - 2 recetas con 1 medicamento c/u.
+    "1000073130": {
+        "socio": "61134592602",
+        "recetas": [
+            {
+               "Troquel": "2039",
+                "Codigo": "3002",
+                "monodroga": "IBUPROFENO",
+                "descripcion": "IBUPROFENO 400 MG"
+            },
+            {
+                "Troquel": "2039",
+                "Codigo": "3002",
+                "monodroga": "IBUPROFENO",
+                "descripcion": "IBUPROFENO 400 MG"
+            }
+        ]
+    },
+    # CASO 9: 2 medicamentos de HIV - SIGUE PROCESO - 2 recetas con 1 medicamento c/u.
+    "1000073131": {
+        "socio": "61134592602",
+        "recetas": [
+            {
+                "Troquel": "4108451",
+                "Codigo": "18000",
+                "monodroga": "150 MG COMP.REC.X 60",
+                "descripcion": "GlaxoSmithKline"
+            },
+            {
+                "Troquel": "18001",
+                "Codigo": "18001",
+                "monodroga": "EFAVIRENZ",
+                "descripcion": "EFAVIRENZ 600 MG"
+            }
+        ]
+    },
+    # CASO 10: 1 receta de HIV + 1 receta de ibupirac - REVISAR - 1 recetas con 2 o + medicamento c/u.
+    "1000073132": {
+        "socio": "61134592602",
+        "recetas": [
+            {
+                "Troquel": "4108451",
+                "Codigo": "18000",
+                "monodroga": "150 MG COMP.REC.X 60",
+                "descripcion": "GlaxoSmithKline"
+            },
+            {
+                "Troquel": "2039",
+                "Codigo": "3002",
+                "monodroga": "IBUPROFENO",
+                "descripcion": "IBUPROFENO 400 MG"
+            }
+        ]
+    },
+    # CASO 11: 2 recetas de ibupiracs - DESCARTAR - 1 recetas con 2 o + medicamento c/u.
+    "1000073133": {
+        "socio": "61134592602",
+        "recetas": [
+            {
+               "Troquel": "2039",
+                "Codigo": "3002",
+                "monodroga": "IBUPROFENO",
+                "descripcion": "IBUPROFENO 400 MG"
+            },
+            {
+                "Troquel": "2039",
+                "Codigo": "3002",
+                "monodroga": "IBUPROFENO",
+                "descripcion": "IBUPROFENO 400 MG"
+            }
+        ]
+    },
+    # CASO 12: 2 recetas de HIV  - SIGUE EN PROCESO - 1 recetas con 2 o + medicamento c/u.
+    "1000073134": {
+        "socio": "61134592602",
+        "recetas": [
+            {
+                "Troquel": "4108451",
+                "Codigo": "18000",
+                "monodroga": "150 MG COMP.REC.X 60",
+                "descripcion": "GlaxoSmithKline"
+            },
+            {
+                "Troquel": "18001",
+                "Codigo": "18001",
+                "monodroga": "EFAVIRENZ",
+                "descripcion": "EFAVIRENZ 600 MG"
+            }
+        ]
+    },
+     # CASO 13: 2 recetas de HIV  - SIGUE EN PROCESO - 1 recetas con 2 o + medicamento c/u.
+    "1000073135": {
+        "socio": "61134592604",
+        "recetas": [
+            {
+                "Troquel": "4108451",
+                "Codigo": "18000",
+                "monodroga": "150 MG COMP.REC.X 60",
+                "descripcion": "GlaxoSmithKline"
+            },
+            {
+                "Troquel": "18001",
+                "Codigo": "18001",
+                "monodroga": "EFAVIRENZ",
+                "descripcion": "EFAVIRENZ 600 MG"
+            }
+        ]
     }
+    
 }
 
 
@@ -217,16 +368,18 @@ def identificacion_ciclo(
     # Caso 1: Inicio (Abacavir / Socio Carolina)
     if troquel == "45282" and socio_id == "61134592601":
         return {"ciclo": "Inicio de tratamiento", "codigo": 1}
-    
     # Caso 2: Renovación (Efavirenz / Socio Roberto)
     elif troquel == "18001" and socio_id == "62245693702": 
         return {"ciclo": "Renovación", "codigo": 2}
-
-    # Caso 3: Renovación con Sustitución (Nuevo caso mock)
+    # Caso 3: Renovación con Sustitución 
     elif troquel == "21955" and socio_id == "62245693702":
         return {"ciclo": "Renovación", "codigo": 2}
-    
+    # Caso 4: Renovación sin Sustitución 
+    elif troquel == "18000" and socio_id == "61134592601":
+        return {"ciclo": "Renovación", "codigo": 2}
     # Otros casos
+    elif troquel == "18000" and socio_id == "61134592604":
+        return {"ciclo": "Renovación", "codigo": 2}
     else:
         return {"ciclo": "Indeterminado", "codigo": 3}
 
